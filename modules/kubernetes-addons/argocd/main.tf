@@ -31,6 +31,11 @@ resource "helm_release" "argocd_application" {
   }
 
   set {
+    name  = "namespace"
+    value = try(each.value.namespace, local.helm_config["namespace"])
+  }
+
+  set {
     name  = "project"
     value = each.value.project
   }
